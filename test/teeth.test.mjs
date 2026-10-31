@@ -76,3 +76,12 @@ test("gateSegment ignores commands that are not gates", () => {
   assert.equal(gateSegment("cat src/quota.test.ts"), null);
   assert.equal(gateSegment("ls test"), null);
 });
+
+test("the extension tracks only hand-written sources the agent edits inside the repo", async () => {
+  const { touchedSource } = await import("../extension/index.ts");
+  assert.equal(touchedSource("/w", "edit", { path: "src/a.ts" }), "src/a.ts");
+  assert.equal(touchedSource("/w", "write", { path: "/w/src/b.ts" }), "src/b.ts");
+  assert.equal(touchedSource("/w", "edit", { path: "test/a.test.ts" }), null);
+  assert.equal(touchedSource("/w", "edit", { path: "/elsewhere/c.ts" }), null);
+  assert.equal(touchedSource("/w", "read", { path: "src/a.ts" }), null);
+});

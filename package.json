@@ -4,6 +4,6 @@
   "type": "module",
   "bin": { "teeth": "bin/teeth.mjs" },
   "pi": { "extensions": ["./extension/index.ts"] },
-  "scripts": { "test": "node --test test/teeth.test.mjs" },
+  "scripts": { "test": "node --experimental-strip-types --test test/teeth.test.mjs" },
   "license": "MIT"
 }

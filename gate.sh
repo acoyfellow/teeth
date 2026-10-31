@@ -18,7 +18,7 @@ step "2. toothed fixture exits 0"
 code=$(fixture toothed); [ "$code" = 0 ] && ok || bad "exit $code"
 
 step "3. unit tests pass"
-node --test test/teeth.test.mjs >/dev/null 2>&1 && ok || bad "node --test failed"
+node --experimental-strip-types --test test/teeth.test.mjs >/dev/null 2>&1 && ok || bad "node --test failed"
 
 step "4. hand-check receipts show green bugs"
 if [ -f receipts/handcheck.md ] && [ "$(grep -c '^exit:   0$' receipts/handcheck.md)" -ge 2 ] && grep -q 'repo: porch' receipts/handcheck.md && grep -q 'repo: zoo' receipts/handcheck.md; then ok; else bad "receipts/handcheck.md missing porch/zoo green runs"; fi

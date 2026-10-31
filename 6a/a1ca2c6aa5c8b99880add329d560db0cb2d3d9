@@ -1,0 +1,23 @@
+gate.sh
+  s_5ddfc8f4108175::t_e34d83ffe2a188 21
+package.json
+  s_5ddfc8f4108175::t_54ad330a5a47bd 7
+test/teeth.test.mjs
+  s_5ddfc8f4108175::t_e4c4e3a8e505d6 79-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6aa1ca2c6aa5c8b99880add329d560db0cb2d3d9",
+  "prompts": {},
+  "sessions": {
+    "s_5ddfc8f4108175": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0fc06-d951-77a8-8358-cd5dae6891bd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"type":"module","scripts":{"test":"node --experimental-strip-types --test src/quota.test.ts"}}

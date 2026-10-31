@@ -1,0 +1,5 @@
+scan/*.jsonl
+scan/*.log
+scan/candidates.json
+scan/gates.json
+.DS_Store

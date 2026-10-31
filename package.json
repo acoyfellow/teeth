@@ -1,0 +1,9 @@
+{
+  "name": "teeth",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "teeth": "bin/teeth.mjs" },
+  "pi": { "extensions": ["./extension/index.ts"] },
+  "scripts": { "test": "node --test test/teeth.test.mjs" },
+  "license": "MIT"
+}

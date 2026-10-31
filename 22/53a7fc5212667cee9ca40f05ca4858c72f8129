@@ -1,0 +1,71 @@
+.gitignore
+  s_5ddfc8f4108175::t_8cecfdb899399c 1-5
+LICENSE
+  s_5ddfc8f4108175::t_9e86221d991f47 1-21
+bin/teeth.mjs
+  s_5ddfc8f4108175::t_66351889207c84 1-151
+extension/index.ts
+  s_5ddfc8f4108175::t_627657d178fab5 1-67
+fixtures/toothed/package.json
+  s_5ddfc8f4108175::t_860beb3d8dd45a 1
+fixtures/toothed/src/quota.test.ts
+  s_5ddfc8f4108175::t_bf73e6a4a9bc07 1-16
+fixtures/toothed/src/quota.ts
+  s_5ddfc8f4108175::t_91b04e6439bd10 1-8
+fixtures/toothless/package.json
+  s_5ddfc8f4108175::t_1a1697990bef7a 1
+fixtures/toothless/src/quota.test.ts
+  s_5ddfc8f4108175::t_84fafa33149f92 1-8
+fixtures/toothless/src/quota.ts
+  s_5ddfc8f4108175::t_ed28c22bc57824 1-8
+gate.sh
+  s_5ddfc8f4108175::t_1a29e8a6b418da 1-29
+package.json
+  s_5ddfc8f4108175::t_d31df3139f1047 1-9
+receipts/handcheck.md
+  s_5ddfc8f4108175::t_7cf664ca2b300e 1-33
+receipts/refusal.md
+  s_5ddfc8f4108175::t_b44f12b48f7b05 1-138
+receipts/scan.md
+  s_5ddfc8f4108175::t_a1ae6012b7ec2f 1-62
+scan/bite.py
+  s_5ddfc8f4108175::t_bba3af8ca39404 1-89
+scan/clean-transcript.py
+  s_5ddfc8f4108175::t_f6b03575973331 1-45
+scan/demo-refusal.sh
+  s_5ddfc8f4108175::t_da38c26d257a99 1-16
+scan/find-gates.py
+  s_231221b99fcbf7::t_9a6ac81b2997c4 1-26
+scan/handcheck.sh
+  s_5ddfc8f4108175::t_c94d57a840a29e 1-25
+scan/refusal-order.py
+  s_5ddfc8f4108175::t_9f4b5d92284f42 1-22
+scan/ship-check.sh
+  s_5ddfc8f4108175::t_19e9d957aef21d 1-17
+test/teeth.test.mjs
+  s_5ddfc8f4108175::t_8a642b3ee7d671 1-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "2253a7fc5212667cee9ca40f05ca4858c72f8129",
+  "prompts": {},
+  "sessions": {
+    "s_231221b99fcbf7": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a1176a-4538-7369-8003-75cbe8c7d418",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    },
+    "s_5ddfc8f4108175": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0fc06-d951-77a8-8358-cd5dae6891bd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    }
+  }
+}

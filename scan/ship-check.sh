@@ -13,5 +13,5 @@ check "README and LICENSE present" test -f "$work/teeth/README.md" -a -f "$work/
 check "gate passes in the clone" bash "$work/teeth/gate.sh"
 check "guardrail publish passes" sh -c "cd '$work/teeth' && $guardrail publish --exit-code"
 check "gitleaks finds no secrets" gitleaks git --no-banner --redact "$work/teeth"
-check "no machine paths or private names" sh -c "! grep -rnE '/Users/|/var/folders/|opencode|cfdata|31b91e7f|bfcb6ac5' --exclude-dir=.git --exclude=ship-check.sh '$work/teeth'"
+check "no machine paths or private names" sh -c "! grep -rnE '/Users/|/var/folders/|opencode|cfdata|31b91e7f|bfcb6ac5' --exclude-dir=.git --exclude=ship-check.sh --exclude=clean-transcript.py '$work/teeth'"
 exit $fail

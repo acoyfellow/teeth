@@ -20,6 +20,8 @@ Bugs your tests do not catch. Write a test that fails for each:
 
 Exit codes: `0` the gate has teeth, `1` toothless, `2` the suite already fails on unchanged code.
 
+> **Result: the agent nudge works; the mutation check does not earn its cost.** In an A/B on 34 Haiku 4.5 seats per arm, a placebo that only says "check your tests catch a bug before you say done" got most of the gain for less money. Use teeth as a scanner for gates you already have. Do not put it in an agent's loop. Numbers below.
+
 ## Why
 
 Agents say "done" when the tests pass. Tests that pass broken code make that word worthless, and a coding agent is very good at writing tests like that.
@@ -78,12 +80,23 @@ With no `--files`, it checks the TypeScript files changed since `HEAD`, plus unt
 4. The hand-checked bugs are recorded and ship green.
 5. The Pi transcript shows refused → tests written → teeth → done, in that order.
 
+## A/B result
+
+gleam-agents, Claude Haiku 4.5, the same 34 seats in each arm, graded by hidden tests.
+
+| Arm | Hidden tests pass | False "done" | Cost |
+|---|---|---|---|
+| off | 25 | 9 | $17.80 |
+| placebo (a one-line nudge, no mutation) | 29 | 5 | $15.60 |
+| on (teeth runs and blocks "done") | 31 | 3 | $21.09 |
+
+The mutation check adds 2 passes over the placebo at 35% more cost. It does not pay for itself. The nudge is free and gets 4 of the 6 extra passes. The plans are in `gleam-agents/evals/teeth/`.
+
 ## Limits
 
 - **Only 8 kinds of bug.** Boundaries, `&&`/`||`, `===`/`!==` and returned booleans. It does not plant wrong numbers, missing calls or deleted lines.
 - **Equivalent mutants are not filtered.** Some planted changes alter nothing a test could see, so some hints ask for an impossible test. In an earlier hand-labelled set, 29% were like that.
 - **It costs time.** About one full test run per planted bug, 4 at a time. On a slow suite, keep `--files` small.
-- **One agent run is shown, not measured.** There is no A/B yet of teeth on and off across many tasks.
 - **TypeScript only**, because mutant parses TypeScript.
 - Your test command runs in a temp copy of the repo, but `node_modules` is linked, not copied. Do not point it at code you do not trust.
 

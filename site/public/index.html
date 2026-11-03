@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>teeth · do your tests catch bugs?</title>
+<meta name="description" content="teeth plants small bugs in changed TypeScript files and counts how many your tests catch.">
+<link rel="canonical" href="https://teeth.customer0.dev/">
+<link rel="alternate" type="text/plain" href="/llms.txt">
+<style>
+:root{color-scheme:light dark;--text:#1b1b1f;--muted:#5c5c66;--bg:#fff;--line:#ddd;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--text:#ececf0;--muted:#a0a0ab;--bg:#141416;--line:#333}}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 system-ui,sans-serif}
+main{max-width:42rem;margin:0 auto;padding:3rem 1.25rem}
+h1{font-size:2rem;margin:0 0 .25rem}h2{font-size:1.15rem;margin-top:2.5rem}
+p.lede{color:var(--muted);margin-top:0}
+a{color:inherit}code,pre{font-family:var(--mono);font-size:.85rem}
+pre{overflow-x:auto;border:1px solid var(--line);padding:.75rem;border-radius:6px}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left}
+.verdict{display:inline-block;font:500 .75rem var(--mono);padding:.1rem .45rem;border-radius:999px;border:1px solid #c42b1c55;color:#e5564a}
+footer{margin-top:3rem;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<h1>teeth</h1>
+<p class="lede">Do your tests catch bugs? teeth puts small bugs in your code and counts.</p>
+
+<p>teeth is a command-line tool and a Pi extension. It changes your TypeScript code in small ways, for example <code>&lt;</code> to <code>&lt;=</code> or <code>&amp;&amp;</code> to <code>||</code>. It plants 8 kinds of bug. For each bug, it runs your real test command. The share of bugs that your tests catch is the <strong>bite rate</strong>.</p>
+<p>Exit codes: <code>0</code> the tests have teeth. <code>1</code> the tests are toothless. <code>2</code> the tests fail on the unchanged code.</p>
+
+<h2>Verdict <span class="verdict">disproven</span></h2>
+<p>The idea that we tested: put teeth in the agent loop, so that an agent cannot say "done" until its tests catch bugs. The result does not support this idea.</p>
+<p>We used gleam-agents with Claude Haiku 4.5. Each arm had the same 34 seats. Hidden tests graded each seat. (<a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">recomputed from the per-seat receipts</a>)</p>
+<table>
+<tr><th>Arm</th><th>Hidden tests pass</th><th>False "done"</th><th>Cost</th></tr>
+<tr><td>off</td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">25</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">9</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">$17.80</a></td></tr>
+<tr><td>placebo: one line of text, no bugs planted</td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">29</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">5</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">$15.60</a></td></tr>
+<tr><td>on: teeth runs and blocks "done"</td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">31</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">3</a></td><td><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md">$21.09</a></td></tr>
+</table>
+<p>The free placebo gets 4 of the 6 extra passes, at a lower cost. The real check adds 2 more passes and costs $5.49 more than the placebo. A "false done" is a seat that said "done" and then failed the hidden tests.</p>
+<p><strong>Use teeth as a scanner for tests that you already have. Do not put it in an agent loop.</strong></p>
+
+<h2>What a scan finds</h2>
+<p>teeth scanned the real test suites of <a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">58 TypeScript repos</a>. It cost $0 and used no model.</p>
+<ul>
+<li><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">901</a> bugs planted. The tests missed <a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">481 (53%)</a>.</li>
+<li><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">41 of 82</a> files have tests that catch fewer than half of the bugs.</li>
+<li><a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">26</a> files have tests that catch none.</li>
+</ul>
+<p>We checked <a href="https://github.com/acoyfellow/teeth/blob/main/receipts/handcheck.md">2 misses by hand</a>. In a phone relay, any POST reaches the publish handler, and all 9 tests pass. In a game world, the third creature appears in the wrong corner, and all 56 tests pass.</p>
+<p>The scan does not remove equivalent mutants. These are changes that no test can see. In an earlier set that we labelled by hand, <a href="https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md">29%</a> were equivalent. Thus the real share of toothless tests is lower than the numbers above.</p>
+
+<h2>A real agent run</h2>
+<p>In <a href="https://github.com/acoyfellow/teeth/blob/main/receipts/refusal.md">this Pi run</a>, the tests pass and teeth says toothless. The agent writes new tests. teeth says the tests have teeth. Then the agent says "done".</p>
+
+<h2>Use it</h2>
+<pre>git clone https:&#47;&#47;github.com/acoyfellow/mutant && cd mutant && cargo build --release
+export PATH="$PWD/target/release:$PATH"
+git clone https:&#47;&#47;github.com/acoyfellow/teeth && cd teeth
+node bin/teeth.mjs check &lt;repo&gt; --files src/a.ts --test "npm test --silent"</pre>
+<p>teeth uses <a href="https://github.com/acoyfellow/mutant">mutant</a> to plant the bugs. You need Node 22.6 or later.</p>
+
+<h2>Limits</h2>
+<ul>
+<li>Only 8 kinds of bug: boundaries, <code>&amp;&amp;</code>/<code>||</code>, <code>===</code>/<code>!==</code> and returned booleans.</li>
+<li>Equivalent mutants are not removed. Some hints ask for a test that cannot exist.</li>
+<li>It is slow: about one full test run for each planted bug.</li>
+<li>TypeScript only.</li>
+</ul>
+
+<footer><a href="https://github.com/acoyfellow/teeth">Source</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://customer0.dev">customer0.dev</a> · MIT</footer>
+</main>
+</body>
+</html>

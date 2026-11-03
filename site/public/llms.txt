@@ -1,0 +1,20 @@
+# teeth
+
+> teeth plants 8 kinds of small bug in changed TypeScript files, runs the real test command against each, and reports the bite rate: the share of planted bugs the tests catch. Exit 0 has teeth, 1 toothless, 2 the suite fails on unchanged code. Drives mutant.
+
+Verdict: disproven. Putting the mutation check in an agent loop does not pay for itself against a free nudge. A/B in gleam-agents, Claude Haiku 4.5, 34 seats per arm, hidden tests: off 25 pass, 9 false done, $17.80; placebo nudge 29, 5, $15.60; teeth on 31, 3, $21.09. Use teeth as a scanner, not in an agent loop.
+
+Scan: 58 real TypeScript repos, 901 planted bugs, 481 (53%) survived; 41 of 82 files under 50%; 26 files at 0%. $0, no model calls. Equivalent mutants not filtered (29% in an earlier hand-labelled set).
+
+## Receipts
+
+- [verify.md](https://github.com/acoyfellow/teeth/blob/main/receipts/verify.md): gate output and the A/B table recomputed from per-seat receipts
+- [scan.md](https://github.com/acoyfellow/teeth/blob/main/receipts/scan.md): 58-repo scan
+- [handcheck.md](https://github.com/acoyfellow/teeth/blob/main/receipts/handcheck.md): 2 misses checked by hand
+- [refusal.md](https://github.com/acoyfellow/teeth/blob/main/receipts/refusal.md): a real Pi run, refused, tests written, then done
+
+## Source
+
+- [Repo](https://github.com/acoyfellow/teeth)
+- [mutant](https://github.com/acoyfellow/mutant)
+- [Index](https://customer0.dev/llms.txt)

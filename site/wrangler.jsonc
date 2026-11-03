@@ -1,0 +1,8 @@
+{
+  "name": "teeth-site",
+  "account_id": "29db7c74093386544fed8046ef083a4b",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./public", "html_handling": "auto-trailing-slash", "not_found_handling": "404-page" },
+  "workers_dev": false,
+  "routes": [{ "pattern": "teeth.customer0.dev", "custom_domain": true }]
+}
